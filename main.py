@@ -9,8 +9,8 @@ import random
 today = datetime.now()
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
-birthday_1 = os.environ['BIRTHDAY_1']
-birthday_2 = os.environ['BIRTHDAY_2']
+birthday = os.environ['BIRTHDAY']
+
 
 app_id = os.environ["APP_ID"]
 app_secret = os.environ["APP_SECRET"]
@@ -29,17 +29,12 @@ def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
   return delta.days
 
-def get_birthday_1():
-  next = datetime.strptime(str(date.today().year) + "-" + birthday_1, "%Y-%m-%d")
+def get_birthday():
+  next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")
   if next < datetime.now():
     next = next.replace(year=next.year + 1)
   return (next - today).days
 
-def get_birthday_2():
-  next = datetime.strptime(str(date.today().year) + "-" + birthday_2, "%Y-%m-%d")
-  if next < datetime.now():
-    next = next.replace(year=next.year + 1)
-  return (next - today).days
 
 def get_words():
   words = requests.get("https://api.shadiao.pro/chp")
